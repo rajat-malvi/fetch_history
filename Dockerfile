@@ -1,19 +1,24 @@
-FROM python:3.9-slim
+# ------------------------------------------------------------
+# Dockerfile for LinkedIn Profile Extractor (FastAPI + Crawl4AI)
+# ------------------------------------------------------------
 
-# Set the working directory
+# Use a lightweight Python base image
+FROM python:3.10-slim
+
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file
+# Copy dependency file
 COPY requirements.txt .
 
-# Install the dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the FastAPI application code
-COPY search_fastapi.py .
+# Copy all project files
+COPY . .
 
-# Expose the port the app runs on
+# Expose FastAPI default port
 EXPOSE 7860
 
-# Command to run the application
-CMD ["uvicorn", "search_fastapi:app", "--host", "0.0.0.0", "--port", "7860"]
+# Run FastAPI app using Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
