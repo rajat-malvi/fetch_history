@@ -2,3 +2,4 @@ fastapi
 uvicorn
 crawl4ai
 pydantic
+playwright
